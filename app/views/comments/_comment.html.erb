@@ -1,0 +1,27 @@
+<div class="section">
+  <div class="field">
+    <div class="control" style="margin-left:200px;">
+      <p>
+        <strong>Commenter:</strong>
+        <%= comment.commenter %>
+      </p>
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+      <p>
+        <strong>Comment:</strong>
+        <%= comment.body %>
+      </p>
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+      <p>
+        <%= link_to 'Destroy Comment', [comment.article, comment],
+              method: :delete,
+              data: { confirm: "Are you sure?" } %>
+      </p>
+    </div>
+  </div>
+</div>
