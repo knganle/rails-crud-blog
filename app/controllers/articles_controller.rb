@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
-  http_basic_authenticate_with name: 'nganle', password: 'nganle', except: %i[index show]
+  # http_basic_authenticate_with name: 'nganle', password: 'nganle', except: %i[index show]
+  before_action :authenticate_user!
 
   def index
     @articles = Article.all
@@ -17,7 +18,8 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
 
     if @article.save
-      redirect_to @article
+      respond_with Article.create(article_params.merge(user_id: current_user.id))
+      redirect_to @article, notice: 'Article was successfully created.'
     else
       render :new
     end
@@ -39,6 +41,10 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article = Article.find(params[:id])
+    puts 'Current user ---------------'
+    puts pundit_user
+    authorize @article
+    # ArticlePolicy.new(current_user, @article).destroy?
     @article.destroy
 
     redirect_to root_path

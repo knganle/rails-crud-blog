@@ -56,3 +56,11 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'htmlbeautifier'
 
 gem 'bulma-rails', '~> 0.9.1'
+
+gem 'pundit'
+
+gem 'devise'
+
+gem 'rolify'
+
+gem 'pry-byebug'
