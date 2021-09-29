@@ -3,12 +3,13 @@ class ArticlePolicy < ApplicationPolicy
     def resolve
       scope.all
     end
+  end
 
-    def destroy?
-      puts 'In destroy --------------- Role admin'
-      puts @user.role
-      debugger
-      @user.has_role? :admin
-    end
+  def update?
+    @user.id == @record.user.id
+  end
+
+  def destroy?
+    (@user.has_role? :admin) || (@user.id == @record.user.id)
   end
 end

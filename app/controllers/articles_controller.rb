@@ -15,10 +15,9 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
-
-    if @article.save
-      respond_with Article.create(article_params.merge(user_id: current_user.id))
+    @user = User.find(current_user.id)
+    @article = @user.articles.create(article_params)
+    if @article
       redirect_to @article, notice: 'Article was successfully created.'
     else
       render :new
@@ -31,7 +30,7 @@ class ArticlesController < ApplicationController
 
   def update
     @article = Article.find(params[:id])
-
+    authorize @article
     if @article.update(article_params)
       redirect_to @article
     else
@@ -41,8 +40,6 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article = Article.find(params[:id])
-    puts 'Current user ---------------'
-    puts pundit_user
     authorize @article
     # ArticlePolicy.new(current_user, @article).destroy?
     @article.destroy
