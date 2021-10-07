@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @articles = Article.all
+    @articles = Article.where("status = 'public'")
   end
 
   def show
@@ -17,8 +17,17 @@ class ArticlesController < ApplicationController
   def create
     @user = User.find(current_user.id)
     @article = @user.articles.create(article_params)
+
     if @article
-      redirect_to @article, notice: 'Article was successfully created.'
+      if article_params[:status] != 'public'
+        PostCreateScheduleJob.set(wait: 1.minute).perform_later(@article)
+      end
+      notice_message = if article_params[:status] == 'public'
+                         'Article was successfully created.'
+                       else
+                         'Article will be created with status private and will be public after 1 minute(s)'
+                       end
+      redirect_to @article, notice: notice_message
     else
       render :new
     end
