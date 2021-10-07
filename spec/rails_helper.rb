@@ -3,8 +3,12 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
+# NOTE: require 'devise' after require 'rspec/rails'
+require 'devise'
+require_relative 'support/controller_macros'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -31,6 +35,17 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  # config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :request
+
+  config.include Devise::Test::ControllerHelpers, type: :controller
+
+  config.include RSpec::Rails::RequestExampleGroup, type: :request, file_path: %r{spec/api}
+
+  # Use the following instead if you are on Devise <= 4.1.1
+  # config.include Devise::TestHelpers, :type => :controller
+  config.extend ControllerMacros, type: :controller
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
