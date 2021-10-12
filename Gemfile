@@ -78,3 +78,9 @@ gem 'grape-swagger'
 gem 'grape-swagger-entity'
 
 gem 'grape-swagger-representable'
+
+gem 'sidekiq'
+
+gem 'bulma-extensions-rails'
+
+gem 'whenever', require: false
