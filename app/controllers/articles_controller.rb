@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
-  http_basic_authenticate_with name: 'nganle', password: 'nganle', except: %i[index show]
+  # http_basic_authenticate_with name: 'nganle', password: 'nganle', except: %i[index show]
+  before_action :authenticate_user!
 
   def index
     @articles = Article.all
@@ -7,6 +8,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    authorize @article
   end
 
   def new
@@ -14,10 +16,10 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
-
-    if @article.save
-      redirect_to @article
+    @user = User.find(current_user.id)
+    @article = @user.articles.create(article_params)
+    if @article
+      redirect_to @article, notice: 'Article was successfully created.'
     else
       render :new
     end
@@ -29,7 +31,7 @@ class ArticlesController < ApplicationController
 
   def update
     @article = Article.find(params[:id])
-
+    authorize @article
     if @article.update(article_params)
       redirect_to @article
     else
@@ -39,6 +41,8 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article = Article.find(params[:id])
+    authorize @article
+    # ArticlePolicy.new(current_user, @article).destroy?
     @article.destroy
 
     redirect_to root_path
