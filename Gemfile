@@ -73,3 +73,6 @@ end
 gem 'grpc', '~> 1.0'
 gem 'grpc-commons', git: 'https://github.com/shiladitya-bits/grpc-commons', branch: 'master'
 gem 'snip', git: 'https://github.com/knganle/grpc', branch: 'master'
+
+gem 'karafka'
+gem 'waterdrop'
