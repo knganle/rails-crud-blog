@@ -1,29 +1,14 @@
-GIT
-  remote: https://github.com/knganle/grpc
-  revision: cc77c8cdb05db0207f5f31618f0ad8d6ac1874fe
-  branch: master
+PATH
+  remote: /Users/nganle/Desktop/EH/eh-protobuf-core
   specs:
-    snip (0.1.1)
-      grpc
-      grpc-commons
+    eh_protobuf_core (2.4.1)
+      grpc (~> 1.38)
 
-GIT
-  remote: https://github.com/shiladitya-bits/grpc-commons
-  revision: a93cff4f240ad7365c473e531be864adc12caf35
-  branch: master
+PATH
+  remote: /Users/nganle/Desktop/EH/grpc_proto
   specs:
-    grpc-commons (0.1)
-      grpc
-      statsd-instrument
-      stoplight
-
-GEM
-  remote: https://gem.fury.io/eh-devops/
-  specs:
-    eh_protobuf (1.9.57)
-      google-protobuf (~> 3.9.2)
-    eh_protobuf_core (2.0.1)
-      grpc (= 1.19)
+    eh_protobuf (1.12.17)
+      google-protobuf (~> 3.11)
 
 GEM
   remote: https://rubygems.org/
@@ -115,12 +100,12 @@ GEM
     ffi (1.15.4)
     globalid (0.5.2)
       activesupport (>= 5.0)
-    google-protobuf (3.9.2-universal-darwin)
-    googleapis-common-protos-types (1.0.4)
-      google-protobuf (~> 3.0)
-    grpc (1.19.0-universal-darwin)
-      google-protobuf (~> 3.1)
-      googleapis-common-protos-types (~> 1.0.0)
+    google-protobuf (3.18.1-universal-darwin)
+    googleapis-common-protos-types (1.3.0)
+      google-protobuf (~> 3.14)
+    grpc (1.41.0-universal-darwin)
+      google-protobuf (~> 3.17)
+      googleapis-common-protos-types (~> 1.0)
     htmlbeautifier (1.3.1)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
@@ -223,8 +208,6 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.4.2)
-    statsd-instrument (3.1.2)
-    stoplight (2.2.1)
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -264,10 +247,8 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   devise
-  eh_protobuf (~> 1.9.0)!
-  eh_protobuf_core (~> 2.0.0)!
-  grpc (~> 1.0)
-  grpc-commons!
+  eh_protobuf!
+  eh_protobuf_core!
   htmlbeautifier
   jbuilder (~> 2.7)
   listen (~> 3.2)
@@ -278,7 +259,6 @@ DEPENDENCIES
   rolify
   sass-rails (>= 6)
   selenium-webdriver
-  snip!
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3 (~> 1.4)

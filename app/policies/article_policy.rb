@@ -1,6 +1,4 @@
-require 'grpc'
-require 'snip_services_pb'
-
+require 'json'
 class ArticlePolicy < ApplicationPolicy
   def show?
     # (@user.has_role? :admin) || (@user.id == @record.user.id)
@@ -12,11 +10,19 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def create?
-    stub = Snip::UrlSnipService::Stub.new('0.0.0.0:50052', :this_channel_is_insecure)
-    req = Snip::SnipRequest.new(url: @user.email)
-    resp_obj = stub.snip_it(req)
-    puts "Email: #{req.url} - #{resp_obj.url}"
-    resp_obj.url == 'Exists'
+    response = EhProtobuf::EmploymentHero::Client.check_user({
+                                                               email: @user.email
+                                                             })
+    puts "Email: #{@user.email} - #{response.to_json}"
+    puts "Response: #{JSON.pretty_generate(response.to_json)}"
+    puts "Has user: #{!response.errors.empty?}"
+    puts "Email: #{@user.email} - #{response.result.accessible}"
+
+    response = EhProtobuf::EmploymentHero::Client.check_member_is_approver({
+                                                                             approver_id: '7c422706-7058-4479-b3e2-8cbc599496d6'
+                                                                           })
+    puts "Email: #{@user.email} - #{response.to_json}"
+    false
   end
 
   # def destroy?

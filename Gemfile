@@ -65,11 +65,5 @@ gem 'rolify'
 
 gem 'pry-byebug'
 
-source 'https://gem.fury.io/eh-devops/' do
-  gem 'eh_protobuf', '~> 1.9.0'
-  gem 'eh_protobuf_core', '~> 2.0.0'
-end
-
-gem 'grpc', '~> 1.0'
-gem 'grpc-commons', git: 'https://github.com/shiladitya-bits/grpc-commons', branch: 'master'
-gem 'snip', git: 'https://github.com/knganle/grpc', branch: 'master'
+gem 'eh_protobuf', path: '/Users/nganle/Desktop/EH/grpc_proto' 
+gem 'eh_protobuf_core', path: '/Users/nganle/Desktop/EH/eh-protobuf-core' 

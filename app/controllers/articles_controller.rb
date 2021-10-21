@@ -1,5 +1,3 @@
-require 'grpc'
-require 'snip_services_pb'
 class ArticlesController < ApplicationController
   # http_basic_authenticate_with name: 'nganle', password: 'nganle', except: %i[index show]
   before_action :authenticate_user!
