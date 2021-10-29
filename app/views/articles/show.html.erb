@@ -4,6 +4,10 @@
     <div class="media">
       <div class="media-content">
         <p class="title is-4"><%= @article.title %></p>
+        <br />
+        <p class="status">Status:  <%= @article.status %></p>
+        <br />
+        <p class="status">Expiration date:  <%= @article.expiration ?  @article.expiration : '-'%></p>
       </div>
     </div>
     <div class="content">
