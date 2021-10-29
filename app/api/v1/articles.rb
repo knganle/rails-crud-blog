@@ -21,31 +21,6 @@ class Articles < Grape::API
       requires :title, desc: 'the article title'
       requires :body, desc: 'the article body'
     end
-
-    # params do
-    #   requires :id, type: Integer
-    #   optional :text, type: String, regexp: /\A[a-z]+\z/
-    #   group :media, type: Hash do
-    #     requires :url
-    #   end
-    #   optional :audio, type: Hash do
-    #     requires :format, type: Symbol, values: [:mp3, :wav, :aac, :ogg], default: :mp3
-    #   end
-    #   requires :status_code, types: [Integer, String, Array[Integer, String]]
-    #   with(type: String, regexp: /w+/) do
-    #     requires :first_name, desc: 'First name'
-    #     requires :middle_name, desc: 'Middle name'
-    #     requires :last_name, desc: 'Last name'
-    #   end
-    #   requires :state, type: Symbol, values: [:active, :inactive]
-    #   requires :port, except_values: { value: 0..1024, message: 'is not allowed' }
-    #   params do
-    #     optional :beer
-    #     optional :wine
-    #     mutually_exclusive :beer, :wine
-    #   end
-    # end
-
     post do
       article = Article.create!({
                                   user_id: params[:author_id],
