@@ -64,3 +64,17 @@ gem 'devise'
 gem 'rolify'
 
 gem 'pry-byebug'
+
+gem 'rspec-scaffold', '~> 2.0.0.beta1', require: false
+
+group :development, :test do
+  gem 'rspec-rails'
+end
+
+gem 'grape'
+
+gem 'grape-swagger'
+
+gem 'grape-swagger-entity'
+
+gem 'grape-swagger-representable'
