@@ -19,9 +19,7 @@ class ArticlesController < ApplicationController
     @article = @user.articles.create(article_params)
 
     if @article
-      if article_params[:status] != 'public'
-        PostCreateScheduleJob.set(wait: 1.minute).perform_later(@article)
-      end
+      HardWorker.perform_at(1.minutes.from_now, @article.id) if article_params[:status] != 'public'
       notice_message = if article_params[:status] == 'public'
                          'Article was successfully created.'
                        else
