@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @articles = Article.where("status = 'public'")
+    @articles = Article.where("status != 'private'")
   end
 
   def show
@@ -19,9 +19,7 @@ class ArticlesController < ApplicationController
     @article = @user.articles.create(article_params)
 
     if @article
-      if article_params[:status] != 'public'
-        PostCreateScheduleJob.set(wait: 1.minute).perform_later(@article)
-      end
+      PostCreateScheduleJob.set(wait: 1.minute).perform_later(@article) if article_params[:status] != 'public'
       notice_message = if article_params[:status] == 'public'
                          'Article was successfully created.'
                        else
@@ -59,6 +57,6 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :body, :status)
+    params.require(:article).permit(:title, :body, :expiration, :status)
   end
 end

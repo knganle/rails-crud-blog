@@ -78,3 +78,5 @@ gem 'grape-swagger'
 gem 'grape-swagger-entity'
 
 gem 'grape-swagger-representable'
+
+gem 'whenever', require: false
