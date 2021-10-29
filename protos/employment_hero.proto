@@ -1,0 +1,9 @@
+import public "employment_hero/blog.proto";
+
+service RpcServer {
+    rpc CheckUser (
+        EhProtobuf.EmploymentHero.CheckUserRequest
+    ) returns (
+        EhProtobuf.EmploymentHero.CheckUserResponse
+    ) {}
+}

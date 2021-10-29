@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package EhProtobuf.EmploymentHero;
+
+message CheckUserRequest {
+  string email = 1;
+}
+
+message CheckUserResponse {
+  bool accessible = 1;
+}
